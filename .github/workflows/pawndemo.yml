@@ -1,0 +1,32 @@
+name: Pawndemo
+on: 
+  schedule: 
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+jobs: 
+  Pawns: 
+    runs-on: ubuntu-lastet
+    steps: 
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: |
+           sudo apt update
+           sudo apt -y upgrade
+           sudo apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common screen
+           curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+           sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+           sudo apt-get update
+           sudo apt-get install docker-ce
+      - name: pawns
+        run: |
+           wget https://download.iproyal.com/pawns-cli/latest/linux_x86_64/pawns-cli
+           screen pawns-cli -email=winejohn114514@protonmail.com -password=Zhiying520 -device-name=pappy -accept-tos
+           echo "screen pawns finish"
+      - name: stream
+        run: sudo docker stop watchtower; sudo docker rm watchtower; \
+             sudo docker rmi containrrr/watchtower; sudo docker stop psclient; \
+             sudo docker rm psclient; sudo docker rmi packetstream/psclient; \
+             sudo docker run -d --restart=always -e CID=39CT --name psclient \
+             packetstream/psclient:latest && sudo docker run -d --restart=always \
+             --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower\
+             --cleanup --include-stopped --revive-stopped --interval 60 psclient
