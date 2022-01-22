@@ -1,7 +1,7 @@
 name: Pawndemo
 on: 
   schedule: 
-    - cron: '0 2,8,14,20 * * *'
+    - cron: '0 3,9,15,21 * * *'
   workflow_dispatch:
 jobs: 
   Pawns: 
@@ -15,7 +15,7 @@ jobs:
       - name: pawns
         run: |
            wget https://download.iproyal.com/pawns-cli/latest/linux_x86_64/pawns-cli
-           screen pawns-cli -email=winejohn114514@protonmail.com -password=Zhiying520 -device-name=pappy -accept-tos
+           screen ./pawns-cli -email=winejohn114514@protonmail.com -password=Zhiying520 -device-name=pappy -accept-tos
            echo "screen pawns finish"
       - name: stream
         run: sudo docker stop watchtower; sudo docker rm watchtower; \
