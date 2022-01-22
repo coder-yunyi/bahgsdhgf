@@ -23,5 +23,5 @@ jobs:
              sudo docker rm psclient; sudo docker rmi packetstream/psclient; \
              sudo docker run -d --restart=always -e CID=39CT --name psclient \
              packetstream/psclient:latest && sudo docker run -d --restart=always \
-             --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower\
+             --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower \
              --cleanup --include-stopped --revive-stopped --interval 60 psclient
