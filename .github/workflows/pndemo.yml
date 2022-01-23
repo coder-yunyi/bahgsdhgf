@@ -1,10 +1,10 @@
-name: Pawndemo
+name: Pndemo
 on: 
   schedule: 
     - cron: '0 3,9,15,21 * * *'
   workflow_dispatch:
 jobs: 
-  Pawns: 
+  Pns: 
     runs-on: ubuntu-lastet
     steps: 
       - name: Check out repository code
@@ -12,11 +12,6 @@ jobs:
       - run: |
            sudo apt update
            sudo apt -y upgrade
-      - name: pawns
-        run: |
-           wget https://download.iproyal.com/pawns-cli/latest/linux_x86_64/pawns-cli
-           screen ./pawns-cli -email=winejohn114514@protonmail.com -password=Zhiying520 -device-name=pappy -accept-tos
-           echo "screen pawns finish"
       - name: stream
         run: sudo docker stop watchtower; sudo docker rm watchtower; \
              sudo docker rmi containrrr/watchtower; sudo docker stop psclient; \
